@@ -1,0 +1,755 @@
+/* Premium Glassmorphism Style Guide */
+:root {
+  --bg-color: #080c14;
+  --panel-bg: rgba(17, 24, 39, 0.7);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  
+  --accent-primary: #00f2fe;
+  --accent-secondary: #4facfe;
+  --accent-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --purple-color: #8b5cf6;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(79, 172, 254, 0.1) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, rgba(0, 242, 254, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ==========================================================================
+   Left Pane: WhatsApp Simulator
+   ========================================================================== */
+.whatsapp-simulator {
+  background: rgba(4, 6, 12, 0.5);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+}
+
+.phone-frame {
+  width: 100%;
+  max-width: 375px;
+  height: 85vh;
+  background: #0f172a;
+  border-radius: 40px;
+  border: 8px solid #334155;
+  box-shadow: var(--shadow-md), 0 0 0 2px rgba(255, 255, 255, 0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Phone Status Bar */
+.phone-status-bar {
+  height: 40px;
+  background: #0f172a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 600;
+  z-index: 10;
+}
+
+.phone-status-bar .notch {
+  width: 120px;
+  height: 20px;
+  background: #334155;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-top: -10px;
+}
+
+.phone-status-bar .icons i {
+  margin-left: 5px;
+}
+
+/* WhatsApp Contact Header */
+.wa-header {
+  background: #1e293b;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 10;
+}
+
+.wa-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-btn {
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-grad);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-status {
+  font-size: 11px;
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+.wa-header-right {
+  display: flex;
+  gap: 18px;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.wa-header-right i:hover {
+  color: var(--text-primary);
+}
+
+/* Chat Messages Thread */
+.wa-chat-area {
+  flex: 1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 16px 16px;
+  background-color: #090d16;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.system-date {
+  align-self: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.msg {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: slideInMsg 0.25s ease-out forwards;
+}
+
+@keyframes slideInMsg {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.msg.received {
+  align-self: flex-start;
+}
+
+.msg.received .msg-content {
+  background: #1e293b;
+  color: var(--text-primary);
+  border-radius: 0 16px 16px 16px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.msg.sent {
+  align-self: flex-end;
+}
+
+.msg.sent .msg-content {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--text-primary);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 16px 0 16px 16px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  box-shadow: var(--shadow-sm);
+}
+
+.msg-time {
+  font-size: 10px;
+  color: var(--text-secondary);
+  align-self: flex-end;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+/* Chat Quick Scenario Triggers */
+.triggers-panel {
+  background: #131b2e;
+  border-top: 1px solid var(--border-color);
+  padding: 12px;
+}
+
+.triggers-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.triggers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.trigger-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trigger-btn:hover {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Input Area styling */
+.wa-input-form {
+  background: #1e293b;
+  padding: 10px 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+  flex: 1;
+  background: #0f172a;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  gap: 10px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 13.5px;
+  outline: none;
+}
+
+.emoji-icon, .attach-icon, .camera-icon {
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.emoji-icon:hover, .attach-icon:hover, .camera-icon:hover {
+  color: var(--text-primary);
+}
+
+.send-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-grad);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.send-btn:hover {
+  transform: scale(1.08);
+}
+
+
+/* ==========================================================================
+   Right Pane: Clinic Dashboard Console
+   ========================================================================== */
+.dashboard {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.db-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.db-title-area h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #fff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.db-title-area p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Stats Cards */
+.stats-row {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-card.warning {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.stat-icon.purple { background: rgba(139, 92, 246, 0.15); color: var(--purple-color); }
+.stat-icon.blue { background: rgba(79, 172, 254, 0.15); color: var(--accent-secondary); }
+.stat-icon.orange { background: rgba(245, 158, 11, 0.15); color: var(--warning-color); }
+
+.stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-lbl {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Blink Animation for Late Alert */
+.blink {
+  animation: alertBlinker 1.5s linear infinite;
+}
+
+@keyframes alertBlinker {
+  50% { opacity: 0.3; }
+}
+
+/* Dashboard Tabs Navigation */
+.tabs-header {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* Tab Content Display */
+.tab-content {
+  display: none;
+  flex: 1;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Table Layout */
+.table-container {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.db-table th {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.db-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.db-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px !important;
+  font-style: italic;
+}
+
+/* Status Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge.new { background: rgba(79, 172, 254, 0.15); color: var(--accent-secondary); border: 1px solid rgba(79, 172, 254, 0.3); }
+.badge.active { background: rgba(16, 185, 129, 0.15); color: var(--success-color); border: 1px solid rgba(16, 185, 129, 0.3); }
+.badge.confirmed { background: rgba(139, 92, 246, 0.15); color: var(--purple-color); border: 1px solid rgba(139, 92, 246, 0.3); }
+.badge.cancelled { background: rgba(239, 68, 68, 0.15); color: var(--danger-color); border: 1px solid rgba(239, 68, 68, 0.3); }
+.badge.completed { background: rgba(156, 163, 175, 0.15); color: #9ca3af; border: 1px solid rgba(156, 163, 175, 0.3); }
+.badge.late { background: rgba(245, 158, 11, 0.2); color: var(--warning-color); border: 1px solid var(--warning-color); font-weight: 700; }
+
+/* ==========================================================================
+   Developer Logs Terminal Dashboard
+   ========================================================================== */
+.log-console-container {
+  flex: 1;
+  background: #090d16;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.console-header {
+  background: #111827;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.console-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clear-logs-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-logs-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.console-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.log-line {
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  padding-bottom: 6px;
+  animation: logSlide 0.2s ease-out;
+}
+
+@keyframes logSlide {
+  from { opacity: 0; transform: translateX(-5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.log-meta {
+  color: #4b5563;
+  margin-right: 8px;
+}
+
+.log-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* Log Tag colors mapping */
+.log-tag.WEBHOOK { background: rgba(0, 242, 254, 0.15); color: var(--accent-primary); }
+.log-tag.DB_CHECK { background: rgba(245, 158, 11, 0.15); color: var(--warning-color); }
+.log-tag.AI_PARSE { background: rgba(139, 92, 246, 0.15); color: var(--purple-color); }
+.log-tag.DB_WRITE { background: rgba(79, 172, 254, 0.15); color: var(--accent-secondary); }
+.log-tag.OUTBOUND_SMS { background: rgba(16, 185, 129, 0.15); color: var(--success-color); }
+
+.log-msg {
+  color: var(--text-primary);
+}
+
+.log-details-pre {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: #a5b4fc;
+  overflow-x: auto;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   Cron Settings and Control Panel
+   ========================================================================== */
+.cron-control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.cron-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  backdrop-filter: blur(10px);
+}
+
+.cron-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cron-card p {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.cron-action-area {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cron-action-area input {
+  flex: 1;
+  background: #0f172a;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  outline: none;
+}
+
+.cron-action-area input:focus {
+  border-color: var(--accent-secondary);
+}
+
+.cron-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.cron-btn:hover {
+  background: var(--accent-grad);
+  border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.cron-btn.warning:hover {
+  background: var(--warning-color);
+  border-color: transparent;
+}
+
+.cron-btn.success:hover {
+  background: var(--success-color);
+  border-color: transparent;
+}
+
+.cron-btn.danger {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  width: fit-content;
+}
+
+.cron-btn.danger:hover {
+  background: var(--danger-color);
+  border-color: transparent;
+  color: #fff;
+}
